@@ -1,841 +1,934 @@
 <!DOCTYPE html>
-<html lang="am">
+<html lang="am" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ministry Of Health Ethiopia - Digital Government Platform ®</title>
-    <!-- Font Awesome Icons & Google Fonts -->
+    <title>ሐበሻ ፋሽን | Habesha Fashion Online Store</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts (Inter & Noto Sans Ethiopic) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Ethiopic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            900: '#78350f',
+                        },
+                        dark: '#111827',
+                        accent: '#e11d48',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans Ethiopic', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --primary-blue: #0b3a75;
-            --secondary-blue: #1d5cb0;
-            --accent-green: #00a859;
-            --light-bg: #f8f9fa;
-            --dark-text: #1a202c;
-            --gray-text: #4a5568;
-            --border-color: #e2e8f0;
-            --white: #ffffff;
+        /* Custom scrollbar for better visual feel */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', 'Noto Sans Ethiopic', sans-serif;
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
         }
-
-        body {
-            background-color: var(--light-bg);
-            color: var(--dark-text);
-            line-height: 1.6;
-        }
-
-        /* Top Announcement Bar */
-        .announcement-bar {
-            background-color: #062349;
-            color: var(--white);
-            padding: 8px 8%;
-            font-size: 13px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .announcement-text span {
-            color: var(--accent-green);
-            font-weight: bold;
-        }
-
-        .top-right-links {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .lang-select {
-            background: transparent;
-            color: var(--white);
-            border: 1px solid rgba(255,255,255,0.3);
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
             border-radius: 4px;
-            padding: 4px 8px;
-            font-size: 12px;
-            cursor: pointer;
         }
-
-        .lang-select option {
-            color: #333;
-        }
-
-        /* Main Navigation */
-        header {
-            background-color: var(--white);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 8%;
-        }
-
-        .brand-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-
-        .logo-emblem {
-            width: 50px;
-            height: 50px;
-            background: var(--primary-blue);
-            color: var(--white);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-
-        .brand-text h2 {
-            font-size: 16px;
-            color: var(--primary-blue);
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        .brand-text p {
-            font-size: 11px;
-            color: var(--gray-text);
-            letter-spacing: 0.5px;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 25px;
-            align-items: center;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark-text);
-            font-weight: 500;
-            font-size: 14px;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--secondary-blue);
-        }
-
-        .btn-signin {
-            background-color: var(--primary-blue);
-            color: var(--white) !important;
-            padding: 8px 20px;
-            border-radius: 6px;
-            font-weight: 600 !important;
-            transition: background 0.3s !important;
-        }
-
-        .btn-signin:hover {
-            background-color: var(--secondary-blue) !important;
-        }
-
-        /* Hero Banner Section */
-        .hero {
-            background: linear-gradient(90deg, rgba(11, 58, 117, 0.95) 0%, rgba(29, 92, 176, 0.8) 100%), 
-                        url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1600&q=80') center/cover;
-            color: var(--white);
-            padding: 90px 8%;
-            text-align: left;
-        }
-
-        .hero-content {
-            max-width: 750px;
-        }
-
-        .hero-badge {
-            background: rgba(255,255,255,0.15);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            display: inline-block;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .hero h1 {
-            font-size: 42px;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 20px;
-        }
-
-        .hero p {
-            font-size: 18px;
-            opacity: 0.9;
-            margin-bottom: 30px;
-            font-weight: 300;
-        }
-
-        .hero-action-btns {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .btn-action-primary {
-            background-color: var(--accent-green);
-            color: var(--white);
-            padding: 12px 28px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .btn-action-outline {
-            border: 2px solid var(--white);
-            color: var(--white);
-            padding: 12px 28px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .hero-stats {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
-            opacity: 0.85;
-        }
-
-        /* Prime Minister Quote Section */
-        .quote-section {
-            background-color: var(--white);
-            padding: 50px 8%;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .quote-container {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-            background: #f0f4f9;
-            padding: 30px;
-            border-radius: 12px;
-            border-left: 5px solid var(--primary-blue);
-        }
-
-        .quote-icon {
-            font-size: 40px;
-            color: var(--secondary-blue);
-        }
-
-        .quote-text h3 {
-            font-size: 20px;
-            color: var(--primary-blue);
-            margin-bottom: 10px;
-        }
-
-        .quote-text blockquote {
-            font-style: italic;
-            color: var(--gray-text);
-            margin-bottom: 8px;
-        }
-
-        .quote-author {
-            font-weight: 700;
-            color: var(--dark-text);
-            font-size: 14px;
-        }
-
-        /* Services Grid Section */
-        .services-section {
-            padding: 70px 8%;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-header h2 {
-            font-size: 32px;
-            color: var(--primary-blue);
-            font-weight: 700;
-        }
-
-        .section-header p {
-            color: var(--gray-text);
-            font-size: 16px;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
-
-        .service-card {
-            background: var(--white);
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-            position: relative;
-            top: 0;
-        }
-
-        .service-card:hover {
-            top: -5px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            border-color: var(--secondary-blue);
-        }
-
-        .card-icon-wrapper {
-            width: 60px;
-            height: 60px;
-            background: #eaf2ff;
-            color: var(--secondary-blue);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 26px;
-            margin-bottom: 20px;
-        }
-
-        .service-card h3 {
-            font-size: 20px;
-            color: var(--dark-text);
-            margin-bottom: 12px;
-        }
-
-        .service-card p {
-            color: var(--gray-text);
-            font-size: 14px;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .card-link {
-            color: var(--secondary-blue);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #061933;
-            color: var(--white);
-            padding: 60px 8% 20px;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-col h4 {
-            font-size: 16px;
-            margin-bottom: 20px;
-            color: var(--white);
-            position: relative;
-            padding-bottom: 8px;
-        }
-
-        .footer-col h4::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 30px;
-            height: 2px;
-            background-color: var(--accent-green);
-        }
-
-        .footer-col ul {
-            list-style: none;
-        }
-
-        .footer-col ul li {
-            margin-bottom: 10px;
-        }
-
-        .footer-col ul li a {
-            color: #a0aec0;
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s;
-        }
-
-        .footer-col ul li a:hover {
-            color: var(--white);
-        }
-
-        .contact-info p {
-            color: #a0aec0;
-            font-size: 14px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-            color: #a0aec0;
-        }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hero h1 { font-size: 28px; }
-            .quote-container { flex-direction: column; }
-            .announcement-bar { flex-direction: column; gap: 5px; text-align: center; }
-            .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
         }
     </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen">
 
-    <!-- Top Announcement Bar -->
-    <div class="announcement-bar">
-        <div class="announcement-text">
-            <span id="announcement-title">Ministry Of Health Ethiopia</span> - <span id="announcement-sub">Digital Government Platform ®</span>
-        </div>
-        <div class="top-right-links">
-            <select class="lang-select" id="languageSelector" onchange="changeLanguage()">
-                <option value="am" selected>አማርኛ</option>
-                <option value="en">English</option>
-                <option value="om">Afaan Oromoo</option>
-            </select>
-        </div>
-    </div>
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed top-20 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
-    <!-- Main Navigation Header -->
-    <header>
-        <div class="nav-container">
-            <a href="#" class="brand-logo">
-                <div class="logo-emblem">
-                    <i class="fa-solid fa-hospital-user"></i>
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="flex items-center gap-2 group">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-white font-bold text-xl shadow-md group-hover:scale-105 transition-transform">
+                            ሐ
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-xl font-bold tracking-tight text-slate-900 group-hover:text-amber-600 transition-colors">ሐበሻ <span class="text-amber-600">ፋሽን</span></span>
+                            <span class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold">Habesha Elegance</span>
+                        </div>
+                    </a>
                 </div>
-                <div class="brand-text">
-                    <h2 id="logo-title">የጤና ሚኒስቴር - ኢትዮጵያ</h2>
-                    <p id="logo-sub">MINISTRY OF HEALTH - ETHIOPIA</p>
-                </div>
-            </a>
 
-            <ul class="nav-links">
-                <li><a href="#" id="nav-resources">መረጃዎች</a></li>
-                <li><a href="#" id="nav-services">ኢ-አገልግሎት</a></li>
-                <li><a href="#" id="nav-volunteer">በጎ ፈቃድ</a></li>
-                <li><a href="#" id="nav-visit">ጎብኚዎች</a></li>
-                <li><a href="#" id="nav-contact">ግንኙነት</a></li>
-                <li><a href="#" class="btn-signin" id="nav-signin">ይግቡ</a></li>
-            </ul>
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#hero" class="nav-link text-slate-700 hover:text-amber-600 font-medium transition-colors" data-am="መነሻ" data-en="Home">መነሻ</a>
+                    <a href="#categories" class="nav-link text-slate-700 hover:text-amber-600 font-medium transition-colors" data-am="ምድቦች" data-en="Categories">ምድቦች</a>
+                    <a href="#products" class="nav-link text-slate-700 hover:text-amber-600 font-medium transition-colors" data-am="ምርቶች" data-en="Products">ምርቶች</a>
+                    <a href="#sale" class="nav-link text-slate-700 hover:text-amber-600 font-medium transition-colors relative" data-am="ታላቅ ቅናሽ" data-en="Sale">
+                        ታላቅ ቅናሽ
+                        <span class="absolute -top-2 -right-3 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">HOT</span>
+                    </a>
+                    <a href="#contact" class="nav-link text-slate-700 hover:text-amber-600 font-medium transition-colors" data-am="ግንኙነት" data-en="Contact">ግንኙነት</a>
+                </nav>
+
+                <!-- Right Header Actions (Search, Language, Cart) -->
+                <div class="flex items-center gap-3 sm:gap-4">
+                    <!-- Search Input Box -->
+                    <div class="relative hidden sm:block w-48 lg:w-64">
+                        <input type="text" id="search-input" placeholder="ልብሶችን ፈልግ..." class="w-full bg-slate-100 border border-slate-200 text-sm rounded-full py-2 pl-9 pr-4 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:bg-white transition-all placeholder:text-slate-400">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-sm"></i>
+                    </div>
+
+                    <!-- Language Switcher Toggle -->
+                    <button id="lang-toggle-btn" onclick="toggleLanguage()" class="px-2.5 py-1.5 border border-slate-300 rounded-lg text-xs font-semibold hover:border-amber-500 transition-colors flex items-center gap-1.5 text-slate-700">
+                        <i class="fa-solid fa-globe text-amber-600"></i>
+                        <span id="lang-label">EN</span>
+                    </button>
+
+                    <!-- Cart Button -->
+                    <button id="cart-btn" onclick="toggleCartDrawer()" class="relative p-2 text-slate-700 hover:text-amber-600 rounded-full hover:bg-slate-100 transition-colors" aria-label="Shopping Cart">
+                        <i class="fa-solid fa-bag-shopping text-xl"></i>
+                        <span id="cart-count" class="absolute -top-1 -right-1 bg-amber-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center shadow-md scale-100 transition-transform">0</span>
+                    </button>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-700 hover:text-amber-600 rounded-lg">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white px-4 pt-2 pb-4 space-y-2">
+            <div class="pt-2 pb-2">
+                <input type="text" id="search-input-mobile" placeholder="ልብሶችን ፈልግ..." class="w-full bg-slate-100 border border-slate-200 text-sm rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-amber-500">
+            </div>
+            <a href="#hero" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 font-medium border-b border-slate-100" data-am="መነሻ" data-en="Home">መነሻ</a>
+            <a href="#categories" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 font-medium border-b border-slate-100" data-am="ምድቦች" data-en="Categories">ምድቦች</a>
+            <a href="#products" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 font-medium border-b border-slate-100" data-am="ምርቶች" data-en="Products">ምርቶች</a>
+            <a href="#sale" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 font-medium border-b border-slate-100 text-red-600 font-semibold" data-am="ታላቅ ቅናሽ" data-en="Sale">ታላቅ ቅናሽ</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 font-medium" data-am="ግንኙነት" data-en="Contact">ግንኙነት</a>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <div class="hero-badge" id="hero-badge">ጤናማ ዜጋ ለበለፀገች ሀገር!</div>
-            <h1 id="hero-title">የጤና ሚኒስቴር ዲጂታል የመንግስት መድረክ</h1>
-            <p id="hero-desc">ለቀልጣፋ የመንግስት አሰራር እና ለህዝብ አገልግሎቶች የተዘጋጀ የተቀናጀ የዲጂታል መድረክ።</p>
-            
-            <div class="hero-action-btns">
-                <a href="#services" class="btn-action-primary" id="btn-explore">አገልግሎቶችን ይመልከቱ</a>
-                <a href="#" class="btn-action-outline" id="btn-register">አሁኑኑ ይመዝገቡ</a>
+    <!-- Main Content Area -->
+    <main class="flex-grow">
+        <!-- Hero Banner Section -->
+        <section id="hero" class="relative bg-gradient-to-r from-slate-900 via-slate-800 to-amber-950 text-white overflow-hidden py-16 sm:py-24 lg:py-32">
+            <div class="absolute inset-0 opacity-20">
+                <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=1600" alt="Background pattern" class="w-full h-full object-cover">
+            </div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="max-w-2xl space-y-6">
+                    <span class="inline-block bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs sm:text-sm px-3.5 py-1.5 rounded-full font-medium tracking-wide uppercase" data-am="✨ አዲስ የ 2016/2026 ስብስቦች" data-en="✨ New 2026 Collection">✨ አዲስ የ 2016/2026 ስብስቦች</span>
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight" data-am="ባህልን ከዘመናዊነት ጋር አዋህደው ያግኙ" data-en="Discover Elegance Blended with Tradition">
+                        ባህልን ከዘመናዊነት ጋር አዋህደው ያግኙ
+                    </h1>
+                    <p class="text-slate-300 text-base sm:text-lg max-w-xl font-light leading-relaxed" data-am="ለየት ያሉና ጥራታቸውን የጠበቁ ባህላዊና ዘመናዊ አልባሳትን በተጣጣመ ዋጋ እና በተቀላጠፈ የማድረስ አገልግሎት ያግኙ።" data-en="Get unique, high-quality traditional and modern clothing at affordable prices with fast local delivery.">
+                        ለየት ያሉና ጥራታቸውን የጠበቁ ባህላዊና ዘመናዊ አልባሳትን በተጣጣመ ዋጋ እና በተቀላጠፈ የማድረስ አገልግሎት ያግኙ።
+                    </p>
+                    <div class="pt-4 flex flex-wrap gap-4">
+                        <a href="#products" class="px-8 py-3.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-bold rounded-xl shadow-lg shadow-amber-500/25 transform hover:-translate-y-0.5 transition-all text-center" data-am="አሁኑኑ ይግዙ" data-en="Shop Now">
+                            አሁኑኑ ይግዙ <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                        </a>
+                        <a href="#categories" class="px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white border border-white/20 font-semibold rounded-xl backdrop-blur-sm transition-all text-center" data-am="ምድቦችንቃኙ" data-en="Explore Categories">
+                            ምድቦችን ቃኙ
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category Filter Cards -->
+        <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-b border-slate-200">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900" data-am="በምድብ ይፈልጉ" data-en="Shop by Category">በምድብ ይፈልጉ</h2>
+                    <p class="text-slate-500 text-sm mt-1" data-am="የሚፈልጉትን የልብስ አይነት ይምረጡ" data-en="Select the clothing style you are looking for">የሚፈልጉትን የልብስ አይነት ይምረጡ</p>
+                </div>
             </div>
 
-            <div class="hero-stats">
-                <i class="fa-solid fa-users"></i>
-                <span id="hero-stats-text"><strong>4,846 +</strong> አባላት ተቀላቅለዋል</span>
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap gap-2 sm:gap-3 justify-start" id="category-filter-buttons">
+                <button onclick="filterCategory('all')" class="cat-btn active border px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-amber-600 text-white border-amber-600 shadow-sm" data-cat="all" data-am="ሁሉም" data-en="All">ሁሉም</button>
+                <button onclick="filterCategory('traditional')" class="cat-btn border px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-white text-slate-700 border-slate-200 hover:border-amber-500" data-cat="traditional" data-am="ባህላዊ አልባሳት" data-en="Traditional">ባህላዊ አልባሳት</button>
+                <button onclick="filterCategory('women')" class="cat-btn border px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-white text-slate-700 border-slate-200 hover:border-amber-500" data-cat="women" data-am="የሴቶች" data-en="Women">የሴቶች</button>
+                <button onclick="filterCategory('men')" class="cat-btn border px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-white text-slate-700 border-slate-200 hover:border-amber-500" data-cat="men" data-am="የወንዶች" data-en="Men">የወንዶች</button>
+                <button onclick="filterCategory('kids')" class="cat-btn border px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-white text-slate-700 border-slate-200 hover:border-amber-500" data-cat="kids" data-am="የህፃናት" data-en="Kids">የህፃናት</button>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Quote Section (Digital Ethiopia 2030) -->
-    <section class="quote-section">
-        <div class="quote-container">
-            <div class="quote-icon">
-                <i class="fa-solid fa-quote-left"></i>
-            </div>
-            <div class="quote-text">
-                <h3 id="quote-title">ዲጂታል ኢትዮጵያ 2030</h3>
-                <blockquote id="quote-body">
-                    “በዲጂታል ኢትዮጵያ 2030 ውስጥ እየተከናወኑ ያሉ ተግባራት ቀልጣፋ ቢሮክራሲ በመገንባት ከፍተኛ ተጽዕኖ ፈጣሪ ስልቶችን ለማድረስ ከተቀመጠው የመደመር መንግስት ዋና አላማ ጋር የተያያዙ ናቸው።”
-                </blockquote>
-                <div class="quote-author" id="quote-author">— ክቡር ጠቅላይ ሚኒስትር ዶ/ር አብይ አህመድ</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Grid Section -->
-    <section class="services-section" id="services">
-        <div class="section-header">
-            <h2 id="services-title">ምንጮች እና ዲጂታል አገልግሎቶች</h2>
-            <p id="services-sub">የተቀናጁ የህዝብ ዲጂታል አገልግሎቶችን እና ኦፊሴላዊ መረጃዎችን ይመልከቱ።</p>
-        </div>
-
-        <div class="grid-container">
-            
-            <!-- Card 1 -->
-            <div class="service-card">
-                <div class="card-icon-wrapper"><i class="fa-solid fa-laptop-medical"></i></div>
-                <h3 id="card1-title">ኢ-አገልግሎት (eService)</h3>
-                <p id="card1-desc">በተቀናጀ የዲጂታል አገልግሎት መድረካችን በማንኛውም ጊዜ እና ቦታ አገልግሎቶቻችንን በቀላሉ ማግኘት ይችላሉ።</p>
-                <a href="#" class="card-link"><span id="card1-btn">አገልግሎቱን ያግኙ</span> <i class="fa-solid fa-arrow-right"></i></a>
+        <!-- Product Catalog Section -->
+        <section id="products" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900" data-am="ምርጥ የልብስ ስብስቦች" data-en="Featured Clothing Collections">ምርጥ የልብስ ስብስቦች</h2>
+                    <p class="text-slate-500 text-sm mt-1" id="product-count-label">8 ምርቶች ተገኝተዋል</p>
+                </div>
             </div>
 
-            <!-- Card 2 -->
-            <div class="service-card">
-                <div class="card-icon-wrapper"><i class="fa-solid fa-hand-holding-heart"></i></div>
-                <h3 id="card2-title">በጎ ፈቃድ (Volunteer)</h3>
-                <p id="card2-desc">በህብረተሰቡ ውስጥ ጤናን እና ደህንነትን ለማስፋፋት ከተሰጡ በጎ ፈቃደኞቻችን ጋር ይቀላቀሉ።</p>
-                <a href="#" class="card-link"><span id="card2-btn">ተሳታፊ ይሁኑ</span> <i class="fa-solid fa-arrow-right"></i></a>
+            <!-- Product Grid -->
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+                <!-- JavaScript will populate products here dynamically -->
             </div>
+        </section>
 
-            <!-- Card 3 -->
-            <div class="service-card">
-                <div class="card-icon-wrapper"><i class="fa-solid fa-book-bookmark"></i></div>
-                <h3 id="card3-title">ዲጂታል ቤተ-መጻሕፍት (eLibrary)</h3>
-                <p id="card3-desc">ኦፊሴላዊ የጤና ፖሊሲዎችን፣ ህትመቶችን፣ መመሪያዎችን እና ብሄራዊ ደረጃዎችን ለማግኘት ማዕከላዊ ማከማቻ።</p>
-                <a href="#" class="card-link"><span id="card3-btn">መጻሕፍትን ይፈልጉ</span> <i class="fa-solid fa-arrow-right"></i></a>
+        <!-- Promos Banner -->
+        <section id="sale" class="bg-amber-50 border-y border-amber-200 py-12 my-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="space-y-3 text-center md:text-left">
+                    <span class="bg-red-500 text-white font-bold text-xs uppercase px-3 py-1 rounded-full" data-am="የተወሰነ ጊዜ ቅናሽ" data-en="Limited Time Offer">የተወሰነ ጊዜ ቅናሽ</span>
+                    <h3 class="text-2xl sm:text-4xl font-extrabold text-slate-900" data-am="እስከ 30% ቅናሽ በሁሉም ባህላዊ ልብሶች ላይ!" data-en="Up to 30% OFF on all Traditional Wear!">እስከ 30% ቅናሽ በሁሉም ባህላዊ ልብሶች ላይ!</h3>
+                    <p class="text-slate-600 max-w-lg" data-am="ለበዓላት እና ለተለያዩ ኩነቶች የሚሆኑ ውብ የሀበሻ ቀሚሶችን እና የክት ጥፎችን በታላቅ ቅናሽ ይሸምቱ።" data-en="Shop beautiful Habesha dresses and men's traditional suits for festivals and events at discounted prices.">ለበዓላት እና ለተለያዩ ኩነቶች የሚሆኑ ውብ የሀበሻ ቀሚሶችን እና የክት ጥፎችን በታላቅ ቅናሽ ይሸምቱ።</p>
+                </div>
+                <a href="#products" onclick="filterCategory('traditional')" class="px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl shadow-lg transition-transform hover:scale-105 whitespace-nowrap" data-am="ቅናሹን ይሸምቱ" data-en="Shop Discount Now">
+                    ቅናሹን ይሸምቱ
+                </a>
             </div>
-
-            <!-- Card 4 -->
-            <div class="service-card">
-                <div class="card-icon-wrapper"><i class="fa-solid fa-briefcase"></i></div>
-                <h3 id="card4-title">የሥራ ዕድሎች (JobBoard)</h3>
-                <p id="card4-desc">በጤና ሚኒስቴር ውስጥ የሥራ ዕድሎችን ያግኙ እና ያመልክቱ።</p>
-                <a href="#" class="card-link"><span id="card4-btn">ክፍት ቦታዎችን ይመልከቱ</span> <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-
-            <!-- Card 5 -->
-            <div class="service-card">
-                <div class="card-icon-wrapper"><i class="fa-solid fa-id-card-clip"></i></div>
-                <h3 id="card5-title">የጎብኚዎች ቀጠሮ (Visitor)</h3>
-                <p id="card5-desc">የጤና ሚኒስቴር ዋና መስሪያ ቤትን ለመጎብኘት ወይም ከኃላፊዎች ጋር ለመገናኘት ቀጠሮ ይያዙ።</p>
-                <a href="#" class="card-link"><span id="card5-btn">ቀጠሮ ይያዙ</span> <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-
-            <!-- Card 6 -->
-            <div class="service-card">
-                <div class="card-icon-wrapper"><i class="fa-solid fa-comments"></i></div>
-                <h3 id="card6-title">የቅሬታ ማስተናገጃ (Grievance)</h3>
-                <p id="card6-desc">ከጤና አገልግሎቶች ጋር የተያያዙ ስጋቶችዎን እና ቅሬታዎችዎን የሚያቀርቡበት ዘመናዊ መድረክ።</p>
-                <a href="#" class="card-link"><span id="card6-btn">አስተያየት ያስገቡ</span> <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h4>Ministry Of Health ®</h4>
-                <p style="font-size: 13px; color: #a0aec0;" id="foot-slogan">ጤናማ ዜጋ ለበለፀገች ሀገር</p>
-                <p style="font-size: 12px; color: #718096; margin-top: 10px;" id="foot-office">የአይሲቲ መመሪያ</p>
+    <footer id="contact" class="bg-slate-900 text-slate-400 pt-16 pb-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
+            <!-- Col 1: Brand Info -->
+            <div class="space-y-4">
+                <div class="flex items-center gap-2">
+                    <div class="w-9 h-9 rounded-full bg-amber-500 flex items-center justify-center text-slate-950 font-bold text-lg">ሐ</div>
+                    <span class="text-xl font-bold text-white">ሐበሻ <span class="text-amber-500">ፋሽን</span></span>
+                </div>
+                <p class="text-sm text-slate-400 leading-relaxed" data-am="በኢትዮጵያ ውስጥ ጥራት ያላቸውን አልባሳት በታመነና ፈጣን አገልግሎት የሚያቀርብ የኦንላይን ሱቅ።" data-en="Reliable online shop delivering high quality traditional and modern Ethiopian fashion.">
+                    በኢትዮጵያ ውስጥ ጥራት ያላቸውን አልባሳት በታመነና ፈጣን አገልግሎት የሚያቀርብ የኦንላይን ሱቅ።
+                </p>
             </div>
-            
-            <div class="footer-col">
-                <h4 id="foot-res-title">ምንጮች</h4>
-                <ul>
-                    <li><a href="#" id="f-link1">ኢ-አገልግሎት</a></li>
-                    <li><a href="#" id="f-link2">የጎብኚዎች አገልግሎት</a></li>
-                    <li><a href="#" id="f-link3">ዲጂታል ቤተ-መጻሕፍት</a></li>
-                    <li><a href="#" id="f-link4">የቅሬታ ማስተናገጃ</a></li>
+
+            <!-- Col 2: Quick Links -->
+            <div>
+                <h4 class="text-white font-semibold mb-4" data-am="ፈጣን ማገናኛዎች" data-en="Quick Links">ፈጣን ማገናኛዎች</h4>
+                <ul class="space-y-2.5 text-sm">
+                    <li><a href="#hero" class="hover:text-amber-500 transition-colors" data-am="መነሻ" data-en="Home">መነሻ</a></li>
+                    <li><a href="#categories" class="hover:text-amber-500 transition-colors" data-am="የልብስ ምድቦች" data-en="Categories">የልብስ ምድቦች</a></li>
+                    <li><a href="#products" class="hover:text-amber-500 transition-colors" data-am="ምርቶቻችን" data-en="Our Products">ምርቶቻችን</a></li>
+                    <li><a href="#sale" class="hover:text-amber-500 transition-colors" data-am="የቅናሽ እቃዎች" data-en="Sale Offers">የቅናሽ እቃዎች</a></li>
                 </ul>
             </div>
 
-            <div class="footer-col">
-                <h4 id="foot-quick-title">ፈጣን ሊንኮች</h4>
-                <ul>
-                    <li><a href="#" id="f-link5">የበጎ ፈቃድ ፕሮግራም</a></li>
-                    <li><a href="#" id="f-link6">ሥራዎች እና ሙያዎች</a></li>
-                    <li><a href="#" id="f-link7">ክስተቶች እና ጽሁፎች</a></li>
-                    <li><a href="#" id="f-link8">የውል እና ሁኔታዎች ፖሊሲ</a></li>
-                </ul>
+            <!-- Col 3: Payment Methods -->
+            <div>
+                <h4 class="text-white font-semibold mb-4" data-am="የክፍያ አማራጮች" data-en="Payment Methods">የክፍያ አማራጮች</h4>
+                <div class="grid grid-cols-1 gap-2 text-xs font-semibold">
+                    <div class="bg-slate-800 p-2.5 rounded border border-slate-700 text-slate-300 flex items-center gap-2">
+                        <i class="fa-brands fa-telegram text-sky-400 text-base"></i> <span data-am="ክፍያ በቴሌግራም ደረሰኝ" data-en="Pay & Send Receipt via Telegram">ክፍያ በቴሌግራም ደረሰኝ</span>
+                    </div>
+                    <div class="bg-slate-800 p-2.5 rounded border border-slate-700 text-slate-300 flex items-center gap-2">
+                        <i class="fa-solid fa-building-columns text-amber-500"></i> CBE: 1000123456789
+                    </div>
+                    <div class="bg-slate-800 p-2.5 rounded border border-slate-700 text-slate-300 flex items-center gap-2">
+                        <i class="fa-solid fa-mobile-screen text-amber-500"></i> Telebirr: 0911000000
+                    </div>
+                </div>
             </div>
 
-            <div class="footer-col contact-info">
-                <h4 id="foot-contact-title">ያግኙን</h4>
-                <p><i class="fa-solid fa-phone"></i> +251 115 517011</p>
-                <p><i class="fa-solid fa-envelope"></i> ict@moh.gov.et</p>
-                <p><i class="fa-solid fa-location-dot"></i> <span id="foot-address">አዲስ አበባ፣ ኢትዮጵያ</span></p>
+            <!-- Col 4: Contact -->
+            <div>
+                <h4 class="text-white font-semibold mb-4" data-am="አድራሻ እና ግንኙነት" data-en="Contact Us">አድራሻ እና ግንኙነት</h4>
+                <ul class="space-y-3 text-sm">
+                    <li class="flex items-center gap-3"><i class="fa-solid fa-location-dot text-amber-500"></i> አዲስ አበባ፣ ኢትዮጵያ (Addis Ababa)</li>
+                    <li class="flex items-center gap-3"><i class="fa-solid fa-phone text-amber-500"></i> +251 911 000 000</li>
+                    <li class="flex items-center gap-3"><i class="fa-solid fa-envelope text-amber-500"></i> info@habeshafashion.et</li>
+                </ul>
             </div>
         </div>
 
-        <div class="footer-bottom">
-            <div id="footer-copy">&copy; 2026 የጤና ሚኒስቴር ኢትዮጵያ። መብቱ በህግ የተጠበቀ ነው።</div>
-            <div>ICT Executive Directorate Platform</div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+            <p>&copy; 2026 ሐበሻ ፋሽን (Habesha Fashion Store). መብቱ በህግ የተጠበቀ ነው።</p>
+            <div class="flex gap-4">
+                <a href="#" class="hover:text-slate-400">Privacy Policy</a>
+                <a href="#" class="hover:text-slate-400">Terms of Service</a>
+            </div>
         </div>
     </footer>
 
-    <!-- JavaScript for Dynamic Language Switching -->
+    <!-- Shopping Cart Drawer Overlay & Drawer -->
+    <div id="cart-drawer-backdrop" onclick="toggleCartDrawer()" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300"></div>
+
+    <aside id="cart-drawer" class="fixed right-0 top-0 h-full w-full sm:w-[420px] bg-white z-50 shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 ease-in-out">
+        <!-- Cart Header -->
+        <div class="p-5 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-bag-shopping text-amber-600 text-lg"></i>
+                <h3 class="text-lg font-bold text-slate-900" data-am="የግዢ ሣጥንዎ" data-en="Shopping Cart">የግዢ ሣጥንዎ</h3>
+                <span id="cart-drawer-count" class="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-0.5 rounded-full">0</span>
+            </div>
+            <button onclick="toggleCartDrawer()" class="p-2 text-slate-400 hover:text-slate-600 rounded-full hover:bg-slate-200/50 transition-colors">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Cart Items List (Scrollable) -->
+        <div id="cart-items-container" class="flex-grow overflow-y-auto p-5 space-y-4">
+            <!-- Dynamic Cart Items Rendered Here -->
+        </div>
+
+        <!-- Cart Footer & Total Calculation -->
+        <div class="p-5 border-t border-slate-200 bg-slate-50 space-y-4">
+            <div class="space-y-2">
+                <div class="flex justify-between text-sm text-slate-600">
+                    <span data-am="ንዑስ ድምር:" data-en="Subtotal:">ንዑስ ድምር:</span>
+                    <span id="cart-subtotal" class="font-medium text-slate-900">0.00 ETB</span>
+                </div>
+                <div class="flex justify-between text-sm text-slate-600">
+                    <span data-am="የማድረሻ ክፍያ:" data-en="Delivery Fee:">የማድረሻ ክፍያ:</span>
+                    <span class="text-slate-900 font-medium" data-am="በቼክአውት ይወሰናል" data-en="Calculated at checkout">በቼክአውት ይወሰናል</span>
+                </div>
+                <div class="border-t border-slate-200 pt-2 flex justify-between text-base font-bold text-slate-900">
+                    <span data-am="ጠቅላላ ዋጋ:" data-en="Total Amount:">ጠቅላላ ዋጋ:</span>
+                    <span id="cart-total" class="text-amber-600">0.00 ETB</span>
+                </div>
+            </div>
+
+            <button id="checkout-btn" onclick="openCheckoutModal()" class="w-full py-3.5 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                <span data-am="ወደ ክፍያ ይለፉ" data-en="Proceed to Checkout">ወደ ክፍያ ይለፉ</span>
+                <i class="fa-solid fa-arrow-right text-sm"></i>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden my-8 transform transition-all">
+            <!-- Modal Header -->
+            <div class="bg-slate-900 text-white p-5 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <i class="fa-brands fa-telegram text-sky-400 text-2xl"></i>
+                    <div>
+                        <h3 class="text-lg font-bold" data-am="ትዕዛዝ እና የቴሌግራም ደረሰኝ" data-en="Telegram Receipt Checkout">ትዕዛዝ እና የቴሌግራም ደረሰኝ</h3>
+                        <p class="text-xs text-slate-400" data-am="ገንዘቡን ገቢ አድርገው ደረሰኙን አያይዘው ይላኩልን" data-en="Transfer payment and attach receipt screenshot">ገንዘቡን ገቢ አድርገው ደረሰኙን አያይዘው ይላኩልን</p>
+                    </div>
+                </div>
+                <button onclick="closeCheckoutModal()" class="text-slate-400 hover:text-white p-1">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content & Direct Telegram Order Instructions -->
+            <form id="checkout-form" onsubmit="handlePlaceOrder(event)" class="p-6 space-y-4">
+                
+                <!-- Account Transfer Info Box -->
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 space-y-2">
+                    <p class="text-xs font-bold text-amber-900 uppercase" data-am="1. እባክዎን አስቀድመው ክፍያ ይፈጽሙ" data-en="1. Please make payment transfer first">1. እባክዎን አስቀድመው ክፍያ ይፈጽሙ</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-700 font-medium">
+                        <div class="bg-white p-2 rounded border border-amber-200">
+                            <span class="text-slate-400 block text-[10px]" data-am="ንግድ ባንክ (CBE)" data-en="CBE Bank">ንግድ ባንክ (CBE)</span>
+                            <span class="font-bold text-slate-900 select-all">1000123456789</span>
+                        </div>
+                        <div class="bg-white p-2 rounded border border-amber-200">
+                            <span class="text-slate-400 block text-[10px]" data-am="ቴሌብር (Telebirr)" data-en="Telebirr">ቴሌብር (Telebirr)</span>
+                            <span class="font-bold text-slate-900 select-all">0911000000</span>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-amber-800 italic" data-am="* ስም፡ ሐበሻ ፋሽን (Habesha Fashion)" data-en="* Account Name: Habesha Fashion">* ስም፡ ሐበሻ ፋሽን (Habesha Fashion)</p>
+                </div>
+
+                <!-- Customer Details Input -->
+                <div class="space-y-3">
+                    <p class="text-xs font-bold text-slate-900 uppercase" data-am="2. የመላኪያ መረጃዎችን ይሙሉ" data-en="2. Enter Delivery Info">2. የመላኪያ መረጃዎችን ይሙሉ</p>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1" data-am="ሙሉ ስም *" data-en="Full Name *">ሙሉ ስም *</label>
+                        <input type="text" id="cust-name" required placeholder="ምሳሌ፡ አለሙ በቀለ" class="w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1" data-am="ስልክ ቁጥር *" data-en="Phone Number *">ስልክ ቁጥር *</label>
+                            <input type="tel" id="cust-phone" required placeholder="0911..." class="w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1" data-am="አድራሻ / ከተማ *" data-en="City / Location *">አድራሻ / ከተማ *</label>
+                            <input type="text" id="cust-city" required placeholder="አዲስ አበባ፣ 22" class="w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Receipt Image Attachment Preview -->
+                <div class="space-y-2">
+                    <p class="text-xs font-bold text-slate-900 uppercase" data-am="3. የክፍያ ደረሰኝ/Screenshot አያይዝ" data-en="3. Attach Receipt Screenshot">3. የክፍያ ደረሰኝ/Screenshot አያይዝ</p>
+                    <div class="border-2 border-dashed border-slate-300 rounded-xl p-3 text-center bg-slate-50 hover:bg-amber-50/50 hover:border-amber-400 transition-colors">
+                        <input type="file" id="receipt-file" accept="image/*" onchange="previewReceiptImage(event)" class="hidden">
+                        <label for="receipt-file" class="cursor-pointer flex flex-col items-center justify-center gap-1">
+                            <i class="fa-solid fa-cloud-arrow-up text-2xl text-amber-600"></i>
+                            <span id="receipt-file-name" class="text-xs font-semibold text-slate-700" data-am="የደረሰኝ ፎቶ እዚህ ይምረጡ" data-en="Select Receipt Image">የደረሰኝ ፎቶ እዚህ ይምረጡ</span>
+                            <span class="text-[10px] text-slate-400">PNG, JPG, Screenshot</span>
+                        </label>
+                    </div>
+                    <!-- Image Preview Area -->
+                    <div id="receipt-preview-container" class="hidden relative rounded-xl overflow-hidden border border-slate-200 max-h-40">
+                        <img id="receipt-preview-img" src="" alt="Receipt Preview" class="w-full h-40 object-cover">
+                        <button type="button" onclick="removeReceiptImage()" class="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs shadow-md">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Summary Totals -->
+                <div class="bg-slate-100 p-3 rounded-lg flex justify-between items-center text-sm">
+                    <span class="font-bold text-slate-700" data-am="የሚከፈለው ጠቅላላ:" data-en="Total Amount:">የሚከፈለው ጠቅላላ:</span>
+                    <span id="modal-summary-total" class="font-extrabold text-amber-600 text-base">0 ETB</span>
+                </div>
+
+                <!-- Actions -->
+                <div class="pt-2 flex gap-3">
+                    <button type="button" onclick="closeCheckoutModal()" class="w-1/3 py-3 border border-slate-300 text-slate-700 font-semibold rounded-xl hover:bg-slate-100 transition-colors text-sm" data-am="ተመለስ" data-en="Back">ተመለስ</button>
+                    <button type="submit" class="w-2/3 py-3 bg-sky-500 hover:bg-sky-600 text-white font-bold rounded-xl shadow-md transition-all text-sm flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-telegram text-lg"></i>
+                        <span data-am="በቴሌግራም ደረሰኝ ይላኩ" data-en="Send Receipt on Telegram">በቴሌግራም ደረሰኝ ይላኩ</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
     <script>
-        const translations = {
-            am: {
-                announcementTitle: "የጤና ሚኒስቴር ኢትዮጵያ",
-                announcementSub: "ዲጂታል የመንግስት መድረክ ®",
-                logoTitle: "የጤና ሚኒስቴር - ኢትዮጵያ",
-                logoSub: "MINISTRY OF HEALTH - ETHIOPIA",
-                navResources: "መረጃዎች",
-                navServices: "ኢ-አገልግሎት",
-                navVolunteer: "በጎ ፈቃድ",
-                navVisit: "ጎብኚዎች",
-                navContact: "ግንኙነት",
-                navSignin: "ይግቡ",
-                heroBadge: "ጤናማ ዜጋ ለበለፀገች ሀገር!",
-                heroTitle: "የጤና ሚኒስቴር ዲጂታል የመንግስት መድረክ",
-                heroDesc: "ለቀልጣፋ የመንግስት አሰራር እና ለህዝብ አገልግሎቶች የተዘጋጀ የተቀናጀ የዲጂታል መድረክ።",
-                btnExplore: "አገልግሎቶችን ይመልከቱ",
-                btnRegister: "አሁኑኑ ይመዝገቡ",
-                heroStatsText: "<strong>4,846 +</strong> አባላት ተቀላቅለዋል",
-                quoteTitle: "ዲጂታል ኢትዮጵያ 2030",
-                quoteBody: "“በዲጂታል ኢትዮጵያ 2030 ውስጥ እየተከናወኑ ያሉ ተግባራት ቀልጣፋ ቢሮክራሲ በመገንባት ከፍተኛ ተጽዕኖ ፈጣሪ ስልቶችን ለማድረስ ከተቀመጠው የመደመር መንግስት ዋና አላማ ጋር የተያያዙ ናቸው።”",
-                quoteAuthor: "— ክቡር ጠቅላይ ሚኒስትር ዶ/ር አብይ አህመድ",
-                servicesTitle: "ምንጮች እና ዲጂታል አገልግሎቶች",
-                servicesSub: "የተቀናጁ የህዝብ ዲጂታል አገልግሎቶችን እና ኦፊሴላዊ መረጃዎችን ይመልከቱ።",
-                card1Title: "ኢ-አገልግሎት (eService)",
-                card1Desc: "በተቀናጀ የዲጂታል አገልግሎት መድረካችን በማንኛውም ጊዜ እና ቦታ አገልግሎቶቻችንን በቀላሉ ማግኘት ይችላሉ።",
-                card1Btn: "አገልግሎቱን ያግኙ",
-                card2Title: "በጎ ፈቃድ (Volunteer)",
-                card2Desc: "በህብረተሰቡ ውስጥ ጤናን እና ደህንነትን ለማስፋፋት ከተሰጡ በጎ ፈቃደኞቻችን ጋር ይቀላቀሉ።",
-                card2Btn: "ተሳታፊ ይሁኑ",
-                card3Title: "ዲጂታል ቤተ-መጻሕፍት (eLibrary)",
-                card3Desc: "ኦፊሴላዊ የጤና ፖሊሲዎችን፣ ህትመቶችን፣ መመሪያዎችን እና ብሄራዊ ደረጃዎችን ለማግኘት ማዕከላዊ ማከማቻ።",
-                card3Btn: "መጻሕፍትን ይፈልጉ",
-                card4Title: "የሥራ ዕድሎች (JobBoard)",
-                card4Desc: "በጤና ሚኒስቴር ውስጥ የሥራ ዕድሎችን ያግኙ እና ያመልክቱ።",
-                card4Btn: "ክፍት ቦታዎችን ይመልከቱ",
-                card5Title: "የጎብኚዎች ቀጠሮ (Visitor)",
-                card5Desc: "የጤና ሚኒስቴር ዋና መስሪያ ቤትን ለመጎብኘት ወይም ከኃላፊዎች ጋር ለመገናኘት ቀጠሮ ይያዙ።",
-                card5Btn: "ቀጠሮ ይያዙ",
-                card6Title: "የቅሬታ ማስተናገጃ (Grievance)",
-                card6Desc: "ከጤና አገልግሎቶች ጋር የተያያዙ ስጋቶችዎን እና ቅሬታዎችዎን የሚያቀርቡበት ዘመናዊ መድረክ።",
-                card6Btn: "አስተያየት ያስገቡ",
-                footSlogan: "ጤናማ ዜጋ ለበለፀገች ሀገር",
-                footOffice: "የአይሲቲ መመሪያ",
-                footResTitle: "ምንጮች",
-                fLink1: "ኢ-አገልግሎት",
-                fLink2: "የጎብኚዎች አገልግሎት",
-                fLink3: "ዲጂታል ቤተ-መጻሕፍት",
-                fLink4: "የቅሬታ ማስተናገጃ",
-                footQuickTitle: "ፈጣን ሊንኮች",
-                fLink5: "የበጎ ፈቃድ ፕሮግራም",
-                fLink6: "ሥራዎች እና ሙያዎች",
-                fLink7: "ክስተቶች እና ጽሁፎች",
-                fLink8: "የውል እና ሁኔታዎች ፖሊሲ",
-                footContactTitle: "ያግኙን",
-                footAddress: "አዲስ አበባ፣ ኢትዮጵያ",
-                footerCopy: "&copy; 2026 የጤና ሚኒስቴር ኢትዮጵያ። መብቱ በህግ የተጠበቀ ነው።"
+        // Store Application State
+        let currentLang = 'am'; // 'am' or 'en'
+        let activeCategory = 'all';
+        let searchQuery = '';
+        let cart = [];
+        let receiptImageBase64 = null;
+
+        // Sample Clothing Products Catalog Data
+        const products = [
+            {
+                id: 1,
+                title: { am: "የበዓል ባህላዊ የሀበሻ ቀሚስ", en: "Traditional Festive Habesha Dress" },
+                category: "traditional",
+                price: 4500,
+                oldPrice: 5200,
+                rating: 4.9,
+                image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&q=80&w=600",
+                sizes: ["S", "M", "L", "XL"],
+                colors: ["#ffffff", "#fef08a", "#fed7aa"]
             },
-            en: {
-                announcementTitle: "Ministry Of Health Ethiopia",
-                announcementSub: "Digital Government Platform ®",
-                logoTitle: "Ministry Of Health - Ethiopia",
-                logoSub: "MINISTRY OF HEALTH - ETHIOPIA",
-                navResources: "Resources",
-                navServices: "eServices",
-                navVolunteer: "Volunteer",
-                navVisit: "Visit Us",
-                navContact: "Contact Us",
-                navSignin: "Sign In",
-                heroBadge: "Healthier Citizens For Prosperous Nation !",
-                heroTitle: "Ministry Of Health Digital Government Platform",
-                heroDesc: "A unified digital government platform for efficient government operations and public services.",
-                btnExplore: "Explore Our Services",
-                btnRegister: "Register Now",
-                heroStatsText: "<strong>4,846 +</strong> Members Joined",
-                quoteTitle: "Digital Ethiopia 2030",
-                quoteBody: "“The activities underway within Digital Ethiopia 2030 are intrinsically linked to the Medemer government's overarching objective of delivering high-impact strategies via a lean and efficient bureaucracy.”",
-                quoteAuthor: "— Honorable Prime Minister Dr. Abiy Ahmed",
-                servicesTitle: "Resources & Digital Services",
-                servicesSub: "Explore our integrated public digital services and official resources.",
-                card1Title: "eService",
-                card1Desc: "You can easily access our services anytime, anywhere using our integrated digital service platform.",
-                card1Btn: "Access Platform",
-                card2Title: "Volunteer",
-                card2Desc: "Join our dedicated volunteers in promoting health and wellness across the community. Together, we can foster a healthier future.",
-                card2Btn: "Join Program",
-                card3Title: "eLibrary",
-                card3Desc: "A centralized digital repository for accessing official health policies, publications, guidelines, and national standards.",
-                card3Btn: "Explore Books",
-                card4Title: "JobBoard",
-                card4Desc: "Discover and apply for career opportunities within the Ministry of Health to contribute to enhancing healthcare services.",
-                card4Btn: "View Openings",
-                card5Title: "Visitor Appointment",
-                card5Desc: "Make an appointment to visit the Ministry of Health headquarters or arrange meetings with ministry officials.",
-                card5Btn: "Book Appointment",
-                card6Title: "Grievance Service",
-                card6Desc: "Grievance Redressing Service - Access a streamlined platform to voice your concerns and complaints related to services.",
-                card6Btn: "Submit Feedback",
-                footSlogan: "Health Citizens For Prosperous Nation",
-                footOffice: "ICT Executive Office",
-                footResTitle: "Resources",
-                fLink1: "eService",
-                fLink2: "Visitor Service",
-                fLink3: "Digital Library",
-                fLink4: "Grievance Redress",
-                footQuickTitle: "Quick Links",
-                fLink5: "Volunteer Program",
-                fLink6: "Careers & Jobs",
-                fLink7: "Events & Articles",
-                fLink8: "Terms & Conditions Policy",
-                footContactTitle: "Contact Us",
-                footAddress: "Addis Ababa, Ethiopia",
-                footerCopy: "&copy; 2026 Ministry Of Health Ethiopia. All rights reserved."
+            {
+                id: 2,
+                title: { am: "የወንዶች የክት ጥፍ እና ነጭ ሸሚዝ", en: "Men's Traditional Kit Suit & Shirt" },
+                category: "traditional",
+                price: 3800,
+                rating: 4.8,
+                image: "https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&q=80&w=600",
+                sizes: ["M", "L", "XL", "XXL"],
+                colors: ["#ffffff", "#cbd5e1"]
             },
-            om: {
-                announcementTitle: "Ministeera Fayyaa Itoophiyaa",
-                announcementSub: "Madaala Mootummaa Dijiitaalaa ®",
-                logoTitle: "Ministeera Fayyaa - Itoophiyaa",
-                logoSub: "MINISTRY OF HEALTH - ETHIOPIA",
-                navResources: "Qabeenya",
-                navServices: "Tajaajila-e",
-                navVolunteer: "Fedhiidhaan",
-                navVisit: "Nu Daawwadhaa",
-                navContact: "Nu Quunnamaa",
-                navSignin: "Seenaa",
-                heroBadge: "Lammii Fayyaa Qabu Biyya Badhaatuuf!",
-                heroTitle: "Madaala Mootummaa Dijiitaalaa Ministeera Fayyaa",
-                heroDesc: "Hoojii mootummaa si'aawaa fi tajaajila ummataaf madaala dijiitaalaa qindaa'e.",
-                btnExplore: "Tajaajila Nuu Ilaalaa",
-                btnRegister: "Amma Galmeeffamaa",
-                heroStatsText: "<strong>4,846 +</strong> Miseensonni Makamaniiru",
-                quoteTitle: "Itoophiyaa Dijiitaalaa 2030",
-                quoteBody: "“Sochiiwwan Itoophiyaa Dijiitaalaa 2030 keessatti geggeeffamaa jiran kaayyoo guddaa mootummaa Medemer waliin qindaawanii jiru.”",
-                quoteAuthor: "— Kabajamoo Muummicha Ministeeraa Dr. Abiy Ahimad",
-                servicesTitle: "Qabeenya fi Tajaajila Dijiitaalaa",
-                servicesSub: "Tajaajiloota dijiitaalaa uummataa qindaawaniifi odeeffannoowwan uummataa ilaalaa.",
-                card1Title: "Tajaajila-e (eService)",
-                card1Desc: "Platformii tajaajila dijiitaalaa keenyaatiin yeroo fi bakka kamittuu tajaajila keenya salphaatti argachuu dhesso.",
-                card1Btn: "Tajaajila Argadhaa",
-                card2Title: "Fedhiidhaan (Volunteer)",
-                card2Desc: "Fayyaa fi nageenya hawaasa keessatti babal'isuuf fedhiidhaan namoota nu waliin hojjetንnitti makamaa.",
-                card2Btn: "Hirmaataa Izaa",
-                card3Title: "Mana Kitaabaa Dijiitaalaa (eLibrary)",
-                card3Desc: "Imaammata fayyaa, maxxansawwan, qajeelfamoota fi standards argachuuf kuusaa giddugaleessaa.",
-                card3Btn: "Kitaabota Barbaadaa",
-                card4Title: "Carraa Hojii (JobBoard)",
-                card4Desc: "Ministeera Fayyaa keessatti carraawwan hojii argadhaa fi iyyadhaa.",
-                card4Btn: "Hojiiwwan Banamaa Ilaalaa",
-                card5Title: "Beellama Daawwattootaa (Visitor)",
-                card5Desc: "Waajjira muummee Ministeera Fayyaa daawwachuuf ykn qondaaltota waliin walጋ'uuf beellama qabadhaa.",
-                card5Btn: "Beellama Qabadhaa",
-                card6Title: "Tajaajila Komii (Grievance)",
-                card6Desc: "Tajaajila komii hiikuu - Komii fi yaada keessan tajaajila fayyaa waliin walqabatu dhiyeessuuf.",
-                card6Btn: "Yaada Dhiyeessaa",
-                footSlogan: "Lammii Fayyaa Qabu Biyya Badhaatuuf",
-                footOffice: "Waajjira Raawwachiisaa ICT",
-                footResTitle: "Qabeenya",
-                fLink1: "Tajaajila-e",
-                fLink2: "Tajaajila Daawwattootaa",
-                fLink3: "Mana Kitaabaa Dijiitaalaa",
-                fLink4: "Tajaajila Komii",
-                footQuickTitle: "Loomawwan Saffisaa",
-                fLink5: "Sagantaa Fedhiidhaan",
-                fLink6: "Hojii fi Ogummaa",
-                fLink7: "Taateewwan fi Barruulee",
-                fLink8: "Imaammata Haala fi Seeraa",
-                footContactTitle: "Nu Quunnamaa",
-                footAddress: "Finfinnee, Itoophiyaa",
-                footerCopy: "&copy; 2026 Ministeera Fayyaa Itoophiyaa. Mirgi maxxansaa seeraan eegamaa ነው."
+            {
+                id: 3,
+                title: { am: "ዘመናዊ የሴቶች ተራ ልብስ (Casual Dress)", en: "Modern Women Casual Summer Dress" },
+                category: "women",
+                price: 2200,
+                oldPrice: 2600,
+                rating: 4.6,
+                image: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&q=80&w=600",
+                sizes: ["S", "M", "L"],
+                colors: ["#e11d48", "#2563eb", "#000000"]
+            },
+            {
+                id: 4,
+                title: { am: "የወንዶች ዘመናዊ ጃኬት እና ሱሪ", en: "Men's Casual Smart Jacket Set" },
+                category: "men",
+                price: 3400,
+                rating: 4.7,
+                image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=600",
+                sizes: ["M", "L", "XL"],
+                colors: ["#1e293b", "#78350f", "#334155"]
+            },
+            {
+                id: 5,
+                title: { am: "የህፃናት ባህላዊ አልባሳት ስብስብ", en: "Kids Traditional Festival Outfit" },
+                category: "kids",
+                price: 1800,
+                rating: 4.9,
+                image: "https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?auto=format&fit=crop&q=80&w=600",
+                sizes: ["S", "M"],
+                colors: ["#ffffff", "#f59e0b"]
+            },
+            {
+                id: 6,
+                title: { am: "የሴቶች የቢሮ አልባሳት (Formal Blazer)", en: "Women Formal Office Blazer" },
+                category: "women",
+                price: 2900,
+                rating: 4.5,
+                image: "https://images.unsplash.com/photo-1548142813-c348350df52b?auto=format&fit=crop&q=80&w=600",
+                sizes: ["S", "M", "L", "XL"],
+                colors: ["#0f172a", "#94a3b8", "#b45309"]
+            },
+            {
+                id: 7,
+                title: { am: "የወንዶች ዘመናዊ ቲሸርት (Premium T-Shirt)", en: "Men's Premium Cotton T-Shirt" },
+                category: "men",
+                price: 1100,
+                oldPrice: 1400,
+                rating: 4.4,
+                image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=600",
+                sizes: ["S", "M", "L", "XL"],
+                colors: ["#000000", "#ffffff", "#166534"]
+            },
+            {
+                id: 8,
+                title: { am: "የህፃናት ዘመናዊ የቅዝቃዜ ጃኬት", en: "Kids Warm Winter Jacket" },
+                category: "kids",
+                price: 2100,
+                rating: 4.8,
+                image: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&q=80&w=600",
+                sizes: ["S", "M", "L"],
+                colors: ["#ea580c", "#0284c7"]
             }
-        };
+        ];
 
-        function changeLanguage() {
-            const selectedLang = document.getElementById('languageSelector').value;
-            const langData = translations[selectedLang];
+        // Track selected options per product card
+        const selectedOptions = {};
 
-            // Map keys to element IDs
-            const map = {
-                'announcement-title': langData.announcementTitle,
-                'announcement-sub': langData.announcementSub,
-                'logo-title': langData.logoTitle,
-                'logo-sub': langData.logoSub,
-                'nav-resources': langData.navResources,
-                'nav-services': langData.navServices,
-                'nav-volunteer': langData.navVolunteer,
-                'nav-visit': langData.navVisit,
-                'nav-contact': langData.navContact,
-                'nav-signin': langData.navSignin,
-                'hero-badge': langData.heroBadge,
-                'hero-title': langData.heroTitle,
-                'hero-desc': langData.heroDesc,
-                'btn-explore': langData.btnExplore,
-                'btn-register': langData.btnRegister,
-                'hero-stats-text': langData.heroStatsText,
-                'quote-title': langData.quoteTitle,
-                'quote-body': langData.quoteBody,
-                'quote-author': langData.quoteAuthor,
-                'services-title': langData.servicesTitle,
-                'services-sub': langData.servicesSub,
-                'card1-title': langData.card1Title,
-                'card1-desc': langData.card1Desc,
-                'card1-btn': langData.card1Btn,
-                'card2-title': langData.card2Title,
-                'card2-desc': langData.card2Desc,
-                'card2-btn': langData.card2Btn,
-                'card3-title': langData.card3Title,
-                'card3-desc': langData.card3Desc,
-                'card3-btn': langData.card3Btn,
-                'card4-title': langData.card4Title,
-                'card4-desc': langData.card4Desc,
-                'card4-btn': langData.card4Btn,
-                'card5-title': langData.card5Title,
-                'card5-desc': langData.card5Desc,
-                'card5-btn': langData.card5Btn,
-                'card6-title': langData.card6Title,
-                'card6-desc': langData.card6Desc,
-                'card6-btn': langData.card6Btn,
-                'foot-slogan': langData.footSlogan,
-                'foot-office': langData.footOffice,
-                'foot-res-title': langData.footResTitle,
-                'f-link1': langData.fLink1,
-                'f-link2': langData.fLink2,
-                'f-link3': langData.fLink3,
-                'f-link4': langData.fLink4,
-                'foot-quick-title': langData.footQuickTitle,
-                'f-link5': langData.fLink5,
-                'f-link6': langData.fLink6,
-                'f-link7': langData.fLink7,
-                'f-link8': langData.fLink8,
-                'foot-contact-title': langData.footContactTitle,
-                'foot-address': langData.footAddress,
-                'footer-copy': langData.footerCopy
-            };
+        // Initialize App
+        window.addEventListener('DOMContentLoaded', () => {
+            // Setup initial product selections
+            products.forEach(p => {
+                selectedOptions[p.id] = {
+                    size: p.sizes[0],
+                    color: p.colors[0]
+                };
+            });
+            
+            renderProducts();
+            setupSearchListeners();
+        });
 
-            for (let id in map) {
-                const el = document.getElementById(id);
-                if (el) {
-                    el.innerHTML = map[id];
+        // Language Toggle Functionality
+        function toggleLanguage() {
+            currentLang = currentLang === 'am' ? 'en' : 'am';
+            document.getElementById('lang-label').textContent = currentLang === 'am' ? 'EN' : 'አማ';
+            
+            // Translate all elements with data attributes
+            document.querySelectorAll('[data-am]').forEach(el => {
+                if (currentLang === 'am') {
+                    el.textContent = el.getAttribute('data-am');
+                } else if (el.getAttribute('data-en')) {
+                    el.textContent = el.getAttribute('data-en');
                 }
+            });
+
+            // Re-render Products with new language
+            renderProducts();
+            renderCart();
+        }
+
+        // Render Products Catalog Grid
+        function renderProducts() {
+            const container = document.getElementById('product-grid');
+            container.innerHTML = '';
+
+            const filteredProducts = products.filter(p => {
+                const matchesCat = activeCategory === 'all' || p.category === activeCategory;
+                const matchesSearch = p.title.am.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                                      p.title.en.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesCat && matchesSearch;
+            });
+
+            // Update product count UI
+            document.getElementById('product-count-label').textContent = 
+                currentLang === 'am' ? `${filteredProducts.length} ምርቶች ተገኝተዋል` : `${filteredProducts.length} products found`;
+
+            if (filteredProducts.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full py-16 text-center text-slate-400">
+                        <i class="fa-solid fa-shirt text-5xl mb-3 opacity-40"></i>
+                        <p class="text-lg font-semibold">${currentLang === 'am' ? 'ምንም አይነት ልብስ አልተገኘም' : 'No clothing items found'}</p>
+                    </div>
+                `;
+                return;
             }
+
+            filteredProducts.forEach(prod => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group";
+
+                const selectedSize = selectedOptions[prod.id]?.size || prod.sizes[0];
+                const selectedColor = selectedOptions[prod.id]?.color || prod.colors[0];
+
+                card.innerHTML = `
+                    <!-- Image Box -->
+                    <div class="relative aspect-[4/5] bg-slate-100 overflow-hidden">
+                        <img src="${prod.image}" alt="${prod.title[currentLang]}" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://placehold.co/400x500/e2e8f0/475569?text=Habesha+Fashion'">
+                        ${prod.oldPrice ? `
+                            <span class="absolute top-3 left-3 bg-red-500 text-white text-[11px] font-bold px-2.5 py-1 rounded-full shadow-md">
+                                ${currentLang === 'am' ? 'ቅናሽ' : 'SALE'}
+                            </span>
+                        ` : ''}
+                        <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-slate-800 text-xs font-bold px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm">
+                            <i class="fa-solid fa-star text-amber-500"></i> ${prod.rating}
+                        </div>
+                    </div>
+
+                    <!-- Content Details -->
+                    <div class="p-5 flex flex-col flex-grow justify-between space-y-4">
+                        <div>
+                            <span class="text-[11px] font-bold text-amber-600 uppercase tracking-wider">${prod.category}</span>
+                            <h3 class="text-base font-bold text-slate-900 mt-1 line-clamp-1 group-hover:text-amber-600 transition-colors">
+                                ${prod.title[currentLang]}
+                            </h3>
+                            <div class="mt-2 flex items-baseline gap-2">
+                                <span class="text-lg font-extrabold text-slate-900">${prod.price.toLocaleString()} ብር</span>
+                                ${prod.oldPrice ? `<span class="text-xs text-slate-400 line-through">${prod.oldPrice.toLocaleString()} ብር</span>` : ''}
+                            </div>
+                        </div>
+
+                        <!-- Options Selectors (Sizes & Colors) -->
+                        <div class="space-y-3 pt-2 border-t border-slate-100">
+                            <!-- Size Selector -->
+                            <div>
+                                <label class="text-[11px] font-semibold text-slate-500 block mb-1">
+                                    ${currentLang === 'am' ? 'መጠን (Size):' : 'Size:'}
+                                </label>
+                                <div class="flex flex-wrap gap-1.5">
+                                    ${prod.sizes.map(sz => `
+                                        <button onclick="selectProductSize(${prod.id}, '${sz}')" 
+                                                class="px-2.5 py-1 text-xs font-semibold rounded-md border transition-all ${sz === selectedSize ? 'bg-amber-600 text-white border-amber-600 shadow-sm' : 'bg-slate-50 text-slate-700 border-slate-200 hover:border-slate-300'}">
+                                            ${sz}
+                                        </button>
+                                    `).join('')}
+                                </div>
+                            </div>
+
+                            <!-- Color Selector -->
+                            <div>
+                                <label class="text-[11px] font-semibold text-slate-500 block mb-1">
+                                    ${currentLang === 'am' ? 'ቀለም (Color):' : 'Color:'}
+                                </label>
+                                <div class="flex items-center gap-2">
+                                    ${prod.colors.map(col => `
+                                        <button onclick="selectProductColor(${prod.id}, '${col}')" 
+                                                style="background-color: ${col};" 
+                                                class="w-5 h-5 rounded-full border-2 transition-all ${col === selectedColor ? 'ring-2 ring-amber-500 ring-offset-2 border-amber-600' : 'border-slate-300'}">
+                                        </button>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Add to Cart Button -->
+                        <button onclick="addToCart(${prod.id})" 
+                                class="w-full py-2.5 bg-slate-900 hover:bg-amber-600 text-white font-bold text-sm rounded-xl shadow transition-colors flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-cart-plus"></i>
+                            <span>${currentLang === 'am' ? 'ወደ ሣጥን ጨምር' : 'Add to Cart'}</span>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Selection Helpers
+        function selectProductSize(productId, size) {
+            selectedOptions[productId].size = size;
+            renderProducts();
+        }
+
+        function selectProductColor(productId, color) {
+            selectedOptions[productId].color = color;
+            renderProducts();
+        }
+
+        // Filter Category
+        function filterCategory(cat) {
+            activeCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                if (btn.getAttribute('data-cat') === cat) {
+                    btn.className = "cat-btn active border px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-amber-600 text-white border-amber-600 shadow-sm";
+                } else {
+                    btn.className = "cat-btn border px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-white text-slate-700 border-slate-200 hover:border-amber-500";
+                }
+            });
+            renderProducts();
+        }
+
+        // Search Input Listeners
+        function setupSearchListeners() {
+            const handleSearch = (e) => {
+                searchQuery = e.target.value;
+                renderProducts();
+            };
+            document.getElementById('search-input').addEventListener('input', handleSearch);
+            document.getElementById('search-input-mobile').addEventListener('input', handleSearch);
+        }
+
+        // Cart Actions
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const opts = selectedOptions[productId];
+
+            const existingIndex = cart.findIndex(item => 
+                item.id === productId && item.size === opts.size && item.color === opts.color
+            );
+
+            if (existingIndex > -1) {
+                cart[existingIndex].quantity += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    title: product.title,
+                    price: product.price,
+                    image: product.image,
+                    size: opts.size,
+                    color: opts.color,
+                    quantity: 1
+                });
+            }
+
+            renderCart();
+            showToast(currentLang === 'am' ? 'ልብሱ ወደ ሣጥን ተጨምሯል!' : 'Item added to cart!');
+            
+            // Subtle animation on cart icon badge
+            const badge = document.getElementById('cart-count');
+            badge.classList.add('scale-125');
+            setTimeout(() => badge.classList.remove('scale-125'), 200);
+        }
+
+        function updateQuantity(index, delta) {
+            if (cart[index]) {
+                cart[index].quantity += delta;
+                if (cart[index].quantity <= 0) {
+                    cart.splice(index, 1);
+                }
+                renderCart();
+            }
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            renderCart();
+            showToast(currentLang === 'am' ? 'ልብሱ ከሣጥን ተሰርዟል' : 'Item removed from cart');
+        }
+
+        function renderCart() {
+            const cartItemsContainer = document.getElementById('cart-items-container');
+            const cartCountBadge = document.getElementById('cart-count');
+            const drawerCountBadge = document.getElementById('cart-drawer-count');
+            const subtotalEl = document.getElementById('cart-subtotal');
+            const totalEl = document.getElementById('cart-total');
+            const checkoutBtn = document.getElementById('checkout-btn');
+
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            cartCountBadge.textContent = totalItems;
+            drawerCountBadge.textContent = totalItems;
+            subtotalEl.textContent = `${totalPrice.toLocaleString()} ETB`;
+            totalEl.textContent = `${totalPrice.toLocaleString()} ETB`;
+
+            checkoutBtn.disabled = cart.length === 0;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="h-full flex flex-col items-center justify-center text-slate-400 py-12">
+                        <i class="fa-solid fa-basket-shopping text-5xl mb-3 opacity-30"></i>
+                        <p class="text-sm font-medium">${currentLang === 'am' ? 'የግዢ ሣጥንዎ ባዶ ነው' : 'Your cart is empty'}</p>
+                    </div>
+                `;
+                return;
+            }
+
+            cartItemsContainer.innerHTML = cart.map((item, idx) => `
+                <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200/80">
+                    <img src="${item.image}" alt="${item.title[currentLang]}" class="w-16 h-20 object-cover rounded-lg bg-slate-200">
+                    <div class="flex-grow">
+                        <h4 class="text-xs font-bold text-slate-900 line-clamp-1">${item.title[currentLang]}</h4>
+                        <div class="text-[11px] text-slate-500 mt-0.5 flex gap-2">
+                            <span>${currentLang === 'am' ? 'መጠን:' : 'Size:'} <strong class="text-slate-700">${item.size}</strong></span>
+                            <span class="flex items-center gap-1">
+                                ${currentLang === 'am' ? 'ቀለም:' : 'Color:'}
+                                <span class="w-2.5 h-2.5 rounded-full inline-block border border-slate-300" style="background-color: ${item.color};"></span>
+                            </span>
+                        </div>
+                        <div class="text-xs font-extrabold text-amber-600 mt-1">${item.price.toLocaleString()} ETB</div>
+                        
+                        <!-- Quantity Controls -->
+                        <div class="flex items-center gap-2 mt-2">
+                            <button onclick="updateQuantity(${idx}, -1)" class="w-6 h-6 rounded bg-white border border-slate-300 flex items-center justify-center text-slate-600 hover:bg-slate-100 text-xs font-bold">-</button>
+                            <span class="text-xs font-bold w-4 text-center">${item.quantity}</span>
+                            <button onclick="updateQuantity(${idx}, 1)" class="w-6 h-6 rounded bg-white border border-slate-300 flex items-center justify-center text-slate-600 hover:bg-slate-100 text-xs font-bold">+</button>
+                        </div>
+                    </div>
+                    <button onclick="removeFromCart(${idx})" class="p-1.5 text-slate-400 hover:text-red-500 transition-colors">
+                        <i class="fa-solid fa-trash-can text-sm"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // Cart Drawer Side Menu Toggle
+        function toggleCartDrawer() {
+            const drawer = document.getElementById('cart-drawer');
+            const backdrop = document.getElementById('cart-drawer-backdrop');
+
+            if (drawer.classList.contains('translate-x-full')) {
+                // Open
+                backdrop.classList.remove('hidden');
+                setTimeout(() => backdrop.classList.remove('opacity-0'), 10);
+                drawer.classList.remove('translate-x-full');
+            } else {
+                // Close
+                drawer.classList.add('translate-x-full');
+                backdrop.classList.add('opacity-0');
+                setTimeout(() => backdrop.classList.add('hidden'), 300);
+            }
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Checkout Modal Functions
+        function openCheckoutModal() {
+            if (cart.length === 0) return;
+            toggleCartDrawer(); // Close cart drawer
+            
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            document.getElementById('modal-summary-total').textContent = `${totalPrice.toLocaleString()} ETB`;
+
+            const modal = document.getElementById('checkout-modal');
+            modal.classList.remove('hidden');
+        }
+
+        function closeCheckoutModal() {
+            const modal = document.getElementById('checkout-modal');
+            modal.classList.add('hidden');
+        }
+
+        // Handle Receipt Image Selection Preview
+        function previewReceiptImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    receiptImageBase64 = e.target.result;
+                    document.getElementById('receipt-preview-img').src = e.target.result;
+                    document.getElementById('receipt-preview-container').classList.remove('hidden');
+                    document.getElementById('receipt-file-name').textContent = file.name;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function removeReceiptImage() {
+            receiptImageBase64 = null;
+            document.getElementById('receipt-file').value = "";
+            document.getElementById('receipt-preview-container').classList.add('hidden');
+            document.getElementById('receipt-file-name').textContent = currentLang === 'am' ? 'የደረሰኝ ፎቶ እዚህ ይምረጡ' : 'Select Receipt Image';
+        }
+
+        // Handle Place Order & Redirect to Telegram
+        function handlePlaceOrder(event) {
+            event.preventDefault();
+            const name = document.getElementById('cust-name').value;
+            const phone = document.getElementById('cust-phone').value;
+            const city = document.getElementById('cust-city').value;
+
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            // Construct Order Summary text for Telegram
+            let orderText = `🛍️ *አዲስ የልብስ ትዕዛዝ (New Order)*\n\n`;
+            orderText += `👤 *ስም (Name):* ${name}\n`;
+            orderText += `📞 *ስልክ (Phone):* ${phone}\n`;
+            orderText += `📍 *አድራሻ (Location):* ${city}\n\n`;
+            orderText += `📦 *የታዘዙ አልባሳት (Items):*\n`;
+            
+            cart.forEach((item, index) => {
+                orderText += `${index + 1}. ${item.title[currentLang]} (Size: ${item.size}) x${item.quantity} - ${(item.price * item.quantity).toLocaleString()} ETB\n`;
+            });
+
+            orderText += `\n💰 *ጠቅላላ ክፍያ (Total):* ${totalPrice.toLocaleString()} ETB\n`;
+            orderText += `📄 *የክፍያ ደረሰኝ:* (Receipt image is attached in Telegram chat)`;
+
+            // Open Telegram direct contact with encoded message
+            const telegramAdminUsername = "HabeshaFashionAdmin"; // Replace with actual Telegram handle
+            const encodedText = encodeURIComponent(orderText);
+            const telegramUrl = `https://t.me/${telegramAdminUsername}?text=${encodedText}`;
+
+            // Reset Form and Cart
+            cart = [];
+            renderCart();
+            closeCheckoutModal();
+            removeReceiptImage();
+            document.getElementById('checkout-form').reset();
+
+            // Redirect to Telegram
+            window.open(telegramUrl, '_blank');
+
+            // Success feedback modal
+            const alertMsg = currentLang === 'am'
+                ? `ትዕዛዝዎ ተዘጋጅቷል! አሁን በሚከፈተው ቴሌግራም ላይ ደረሰኙን (Screenshot) በማያያዝ ይላኩልን።`
+                : `Your order summary is ready! Please paste and send your receipt image in Telegram chat.`;
+            
+            alertMessageModal(alertMsg);
+        }
+
+        // Toast Notification System
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = "bg-slate-900 text-white text-xs font-semibold px-4 py-3 rounded-xl shadow-xl flex items-center gap-2 transform translate-y-2 opacity-0 transition-all duration-300 border border-slate-700 pointer-events-auto";
+            toast.innerHTML = `
+                <i class="fa-solid fa-circle-check text-amber-500 text-sm"></i>
+                <span>${message}</span>
+            `;
+
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Alert Modal Replacement
+        function alertMessageModal(msg) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = "fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4";
+            alertDiv.innerHTML = `
+                <div class="bg-white rounded-2xl p-6 max-w-sm w-full text-center space-y-4 shadow-2xl">
+                    <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">${currentLang === 'am' ? 'ትዕዛዝ ተቀብለናል!' : 'Order Placed!'}</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">${msg}</p>
+                    <button onclick="this.closest('.fixed').remove()" class="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl text-sm transition-colors">
+                        ${currentLang === 'am' ? 'እሺ' : 'OK'}
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(alertDiv);
         }
     </script>
 </body>
